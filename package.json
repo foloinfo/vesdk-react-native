@@ -35,6 +35,6 @@
     "react-native": ">=0.60.0 <1.0.x"
   },
   "dependencies": {
-    "react-native-imglysdk": "3.1.0"
+    "react-native-imglysdk": "git+https://github.com/foloinfo/imgly-react-native#827de65de7ac55e8fc728a3c683310e528eb9cd6"
   }
 }

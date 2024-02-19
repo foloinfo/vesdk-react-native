@@ -52,6 +52,47 @@ const struct RN_IMGLY_Constants RN_IMGLY = {
   }
 #endif
 
+
+  [PESDK setLocalizationDictionary: @{
+    @"ja": @{
+      @"pesdk_editor_title_name": @"編集",
+      @"pesdk_editor_title_exportingVideoSpinner": @"書き出し中",
+      @"pesdk_common_button_cancel": @"キャンセル",
+
+      @"pesdk_trim_title_name": @"長さ調整",
+
+      @"pesdk_transform_title_name": @"切り抜き",
+      @"pesdk_transform_button_reset": @"リセット",
+      @"pesdk_transform_asset_freeCrop": @"カスタム",
+      @"pesdk_transform_asset_square": @"正方形",
+
+      @"pesdk_editor_title_discardChangesAlert": @"変更を破棄しますか？",
+      @"pesdk_editor_text_discardChangesAlert": @"このまま戻ると、編集内容は破棄されます。",
+      @"pesdk_editor_button_discardChanges": @"破棄",
+    }
+  }];
+
+  [PESDK setBundleImageBlock:^UIImage * _Nullable(NSString * _Nonnull imageName) {
+    if ([imageName isEqualToString:@"imgly_icon_save"]) {
+      CGFloat scale = [UIScreen mainScreen].scale;
+      int scaleInt = (int) roundf(scale);
+      NSString *filename = @"imgly_icon_approve_44pt";
+
+      if (scaleInt != 1){
+        NSString *scaleString = [NSString stringWithFormat:@"%d",scaleInt];
+        filename = [filename stringByAppendingString:@"@"];
+        filename = [filename stringByAppendingString:scaleString];
+        filename = [filename stringByAppendingString:@"x"];
+      }
+
+      NSURL *url = [NSBundle.imglyBundle URLForResource:filename withExtension:@"png"];
+      NSData *data = [NSData dataWithContentsOfURL:url];
+      UIImage *image = [UIImage imageWithData:data scale:scale];
+      return image;
+    }
+    return nil;
+  }];
+
   __block NSError *error = nil;
   NSData *serializationData = nil;
   if (state != nil) {
